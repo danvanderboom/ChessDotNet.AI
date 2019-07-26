@@ -66,12 +66,7 @@ For example, the random play agent looks like this:
 ```
 public class RandomAgent : IChessAgent
 {
-    Random random;
-
-    public RandomAgent()
-    {
-        random = new Random();
-    }
+    Random random = new Random();
 
     public Move GenerateMove(ChessGame game)
     {
