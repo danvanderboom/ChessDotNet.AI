@@ -9,21 +9,21 @@ namespace AutoChessPlayer
     {
         static void Main(string[] args)
         {
-            var showGameMoves = true; // true to show all moves
+            var showGameMoves = false; // true to show all moves
             var showGameResults = true;
             var gamesToPlay = 10000;
             var gameBatchSize = 100;
 
             Console.WriteLine("Auto playing chess...\n");
 
-            Console.WriteLine("Random vs Random\n");
+            Console.WriteLine("Random vs SpatialControlMaximizerAgent\n");
 
             var stats = new GameStats();
 
             var gamePlayer = new AutoChessGamePlayer
             {
                 WhitePlayer = new RandomAgent(),
-                BlackPlayer = new RandomAgent(),
+                BlackPlayer = new RandomAgent(), // SpatialControlMaximizerAgent
                 GameStats = stats
             };
 
@@ -46,6 +46,9 @@ namespace AutoChessPlayer
                 {
                     if (showGameMoves)
                         Console.Write("\n\n");
+
+                    if (showGameMoves)
+                        Console.Write("Game ");
 
                     Console.Write($"{stats.GameCount}. {result.Result}");
 
