@@ -22,9 +22,14 @@ The default agent for both white and black players is RandomAgent, which very si
 var gamePlayer = new AutoChessGamePlayer
 {
     WhitePlayer = new RandomAgent(),
-    BlackPlayer = new RandomAgent(),
-    GameStats = stats
+    BlackPlayer = new RandomAgent()
 };
+
+// play a single game
+var gameResult = gamePlayer.PlayGame(new RandomAgent(), new RandomAgent());
+
+// play a batch of 100 games
+var stats = gamePlayer.PlayGames(100);
 ```
 
 You can switch out one or both of the agents, try the first version of the SpatialControlMaximizerAgent, or build your own IChessAgent and play it against another agent--or itself.
@@ -34,8 +39,7 @@ For example:
 var gamePlayer = new AutoChessGamePlayer
 {
     WhitePlayer = new RandomAgent(),
-    BlackPlayer = new SpatialControlMaximizerAgent(),
-    GameStats = stats
+    BlackPlayer = new SpatialControlMaximizerAgent()
 };
 ```
 
@@ -43,7 +47,7 @@ var gamePlayer = new AutoChessGamePlayer
 
 This project is the beginning of a collection of tools for building AI agents on top of ChessDotNet, which provides a nice, simple set of abstractions and APIs for manipulating chess pieces on a board, cloning board positions, validating moves, enumerating valid moves, and much more.
 
-So far it's organized into:
+So far these chess AI tools are organized into:
 * Agents - IChessAgent, RandomAgent, SpatialControlMaximizerAgent, and additional agents
 * Scoring - ChessBoardScoreCard, an 8x8 int matrix for scoring position-specific data
 * Search - prioritized queues, solution search trees, and related tools to support prioritized Monte Carlo expansion toward goal
