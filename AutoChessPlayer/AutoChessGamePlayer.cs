@@ -29,17 +29,17 @@ namespace AutoChessPlayer
                 throw new ArgumentNullException(nameof(BlackPlayer));
 
             for (int i = 0; i < gameCount; i++)
-                PlayGame(WhitePlayer, BlackPlayer, GameStats);
+                PlayGame(WhitePlayer, BlackPlayer);
 
             return GameStats;
         }
 
-        public GameResult PlayGame(IChessAgent whiteAgent, IChessAgent blackAgent, GameStats stats)
+        public GameResult PlayGame(IChessAgent whiteAgent, IChessAgent blackAgent)
         {
             var game = new ChessGame();
             var gameResult = new GameResult();
 
-            stats.GameCount += 1;
+            GameStats.GameCount += 1;
 
             while (game.WhoseTurn != Player.None)
             {
@@ -48,7 +48,7 @@ namespace AutoChessPlayer
                     gameResult.Result = "Draw";
                     game.ClaimDraw("Boredom");
 
-                    stats.DrawCount += 1;
+                    GameStats.DrawCount += 1;
 
                     break;
                 }
@@ -57,7 +57,7 @@ namespace AutoChessPlayer
                     ? whiteAgent.GenerateMove(game)
                     : blackAgent.GenerateMove(game);
 
-                stats.MoveCount += 1;
+                GameStats.MoveCount += 1;
                 gameResult.MoveCount += 1;
 
                 var gameBeforeMove = new ChessGame(game.GetGameCreationData());
@@ -69,13 +69,13 @@ namespace AutoChessPlayer
 
                 if (game.IsInCheck(game.WhoseTurn))
                 {
-                    stats.CheckCount += 1;
+                    GameStats.CheckCount += 1;
                     gameResult.CheckCount += 1;
                 }
 
                 if (game.IsStalemated(game.WhoseTurn))
                 {
-                    stats.StalemateCount += 1;
+                    GameStats.StalemateCount += 1;
                     gameResult.Result = "Stalemate";
 
                     break;
@@ -87,9 +87,9 @@ namespace AutoChessPlayer
                     gameResult.Winner = game.WhoseTurn == Player.White ? Player.Black : Player.White;
 
                     if (gameResult.Winner == Player.White)
-                        stats.WhiteCheckmateCount += 1;
+                        GameStats.WhiteCheckmateCount += 1;
                     else
-                        stats.BlackCheckmateCount += 1;
+                        GameStats.BlackCheckmateCount += 1;
 
                     break;
                 }
