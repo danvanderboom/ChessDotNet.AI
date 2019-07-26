@@ -38,3 +38,12 @@ var gamePlayer = new AutoChessGamePlayer
     GameStats = stats
 };
 ```
+
+### ChessDotNet.AI
+
+This project is the beginning of a collection of tools for building AI agents on top of ChessDotNet, which provides a nice, simple set of abstractions and APIs for manipulating chess pieces on a board, cloning board positions, validating moves, enumerating valid moves, and much more.
+
+So far it's organized into:
+* Agents - IChessAgent, RandomAgent, SpatialControlMaximizerAgent, and additional agents
+* Scoring - ChessBoardScoreCard, an 8x8 int matrix for scoring position-specific data
+* Search - prioritized queues, solution search trees, and related tools to support prioritized Monte Carlo expansion toward goal
