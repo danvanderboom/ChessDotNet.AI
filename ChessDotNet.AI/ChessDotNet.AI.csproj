@@ -8,8 +8,4 @@
     <PackageReference Include="ChessDotNet" Version="0.11.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Collections\" />
-  </ItemGroup>
-
 </Project>

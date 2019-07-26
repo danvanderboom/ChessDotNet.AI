@@ -29,7 +29,7 @@ namespace ChessDotNet.AI.Search
         public void Clear() => PriorityQueue.Clear();
 
         public bool Contains(SearchTreeNode node)
-            => PriorityQueue[node.Score].Contains(node);
+            => PriorityQueue.ContainsKey(node.Score) && PriorityQueue[node.Score].Contains(node);
 
         public void CopyTo(SearchTreeNode[] array, int index)
             => AllNodes.ToArray().CopyTo(array, index);
