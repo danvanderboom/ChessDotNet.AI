@@ -9,7 +9,7 @@ namespace ChessDotNet.AI.Search
 {
     // This priority queue is for working with chess positions scored using a simple scalar (int) value.
     // Each discrete priority level can have any number of search tree nodes, 
-    // all of which are considered equivalent priotity to further investigate.
+    // all of which are considered equivalent priority to further investigate.
     public class TreeNodePriorityQueue : ICollection<SearchTreeNode>
     {
         SortedDictionary<int, List<SearchTreeNode>> PriorityQueue;
