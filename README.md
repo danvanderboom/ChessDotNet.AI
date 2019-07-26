@@ -51,3 +51,36 @@ So far these chess AI tools are organized into:
 * Agents - IChessAgent, RandomAgent, SpatialControlMaximizerAgent, and additional agents
 * Scoring - ChessBoardScoreCard, an 8x8 int matrix for scoring position-specific data
 * Search - prioritized queues, solution search trees, and related tools to support prioritized Monte Carlo expansion toward goal
+
+# Create A New AI Agent
+
+Implementing a new agent is easy using the IChessAgent interface. 
+```
+public interface IChessAgent
+{
+    Move GenerateMove(ChessGame game);
+}
+```
+
+For example, the random play agent looks like this:
+```
+public class RandomAgent : IChessAgent
+{
+    Random random;
+
+    public RandomAgent()
+    {
+        random = new Random();
+    }
+
+    public Move GenerateMove(ChessGame game)
+    {
+        if (!game.HasAnyValidMoves(game.WhoseTurn))
+            return null;
+
+        var moves = game.GetValidMoves(game.WhoseTurn).ToList();
+        var randomIndex = random.Next(0, moves.Count);
+        return moves[randomIndex];
+    }
+}
+```
