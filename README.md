@@ -52,7 +52,7 @@ So far these chess AI tools are organized into:
 * Scoring - ChessBoardScoreCard, an 8x8 int matrix for scoring position-specific data
 * Search - prioritized queues, solution search trees, and related tools to support prioritized Monte Carlo expansion toward goal
 
-# Create A New AI Agent
+#### Create A New AI Agent
 
 Implementing a new agent is easy using the IChessAgent interface. 
 ```
