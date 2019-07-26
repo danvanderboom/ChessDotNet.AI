@@ -8,12 +8,7 @@ namespace ChessDotNet.AI.Agents
 {
     public class SpatialControlMaximizerAgent : IChessAgent
     {
-        Random random;
-
-        public SpatialControlMaximizerAgent()
-        {
-            random = new Random();
-        }
+        Random random = new Random();
 
         public Move GenerateMove(ChessGame game)
         {

@@ -1,7 +1,7 @@
-﻿using ChessDotNet;
-using ChessDotNet.AI.Agents;
-using System;
+﻿using System;
 using System.Linq;
+using ChessDotNet;
+using ChessDotNet.AI.Agents;
 
 namespace AutoChessPlayer
 {

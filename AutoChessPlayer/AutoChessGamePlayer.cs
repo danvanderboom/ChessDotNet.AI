@@ -29,12 +29,12 @@ namespace AutoChessPlayer
                 throw new ArgumentNullException(nameof(BlackPlayer));
 
             for (int i = 0; i < gameCount; i++)
-                PlayGame(WhitePlayer, BlackPlayer);
+                PlayGame();
 
             return GameStats;
         }
 
-        public GameResult PlayGame(IChessAgent whiteAgent, IChessAgent blackAgent)
+        public GameResult PlayGame()
         {
             var game = new ChessGame();
             var gameResult = new GameResult();
@@ -54,8 +54,8 @@ namespace AutoChessPlayer
                 }
 
                 Move move = game.WhoseTurn == Player.White
-                    ? whiteAgent.GenerateMove(game)
-                    : blackAgent.GenerateMove(game);
+                    ? WhitePlayer.GenerateMove(game)
+                    : BlackPlayer.GenerateMove(game);
 
                 GameStats.MoveCount += 1;
                 gameResult.MoveCount += 1;
