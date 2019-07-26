@@ -9,7 +9,7 @@ namespace AutoChessPlayer
     {
         static void Main(string[] args)
         {
-            var showGameMoves = false; // true to show all moves
+            var showGameMoves = true; // true to show all moves
             var showGameResults = true;
             var gamesToPlay = 10000;
             var gameBatchSize = 100;
@@ -33,10 +33,10 @@ namespace AutoChessPlayer
                 {
                     var text = $"{before.FullMoveNumber}. {move}";
 
-                    if (Console.CursorLeft + text.Length > Console.WindowWidth)
-                        Console.Write($"\n{text}\t");
-                    else
-                        Console.Write($"{text}\t");
+                    if (Console.CursorLeft + text.Length > Console.WindowWidth - 6)
+                        Console.WriteLine();
+
+                    Console.Write($"{text}\t");
                 };
             }
 
@@ -50,16 +50,17 @@ namespace AutoChessPlayer
                     Console.Write($"{stats.GameCount}. {result.Result}");
 
                     if (result.Result == "Checkmate")
-                        Console.WriteLine($" ({result.Winner})");
-                    else
-                        Console.WriteLine();
+                        Console.Write($" ({result.Winner})");
+
+                    Console.WriteLine($" - {result.MoveCount} moves");
 
                     if (showGameMoves)
                         Console.WriteLine();
                 };
             }
 
-            for (int i = 0; i < (gamesToPlay / gameBatchSize); i++)
+            var batchCount = gamesToPlay / gameBatchSize;
+            for (int i = 0; i < batchCount; i++)
             {
                 gamePlayer.PlayGames(gameBatchSize);
 
