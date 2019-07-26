@@ -16,16 +16,15 @@ namespace AutoChessPlayer
 
             Console.WriteLine("Auto playing chess...\n");
 
-            Console.WriteLine("Random vs SpatialControlMaximizerAgent\n");
-
-            var stats = new GameStats();
+            Console.WriteLine("Random vs Random\n");
 
             var gamePlayer = new AutoChessGamePlayer
             {
                 WhitePlayer = new RandomAgent(),
-                BlackPlayer = new RandomAgent(), // SpatialControlMaximizerAgent
-                GameStats = stats
+                BlackPlayer = new RandomAgent() // BlackPlayer = new SpatialControlMaximizerAgent()
             };
+
+            //var stats = gamePlayer.GameStats;
 
             if (showGameMoves)
             {
@@ -45,12 +44,9 @@ namespace AutoChessPlayer
                 gamePlayer.GameConcluded += (game, result) =>
                 {
                     if (showGameMoves)
-                        Console.Write("\n\n");
+                        Console.Write("\n\nGame ");
 
-                    if (showGameMoves)
-                        Console.Write("Game ");
-
-                    Console.Write($"{stats.GameCount}. {result.Result}");
+                    Console.Write($"{gamePlayer.GameStats.GameCount}. {result.Result}");
 
                     if (result.Result == "Checkmate")
                         Console.Write($" ({result.Winner})");
@@ -68,8 +64,7 @@ namespace AutoChessPlayer
                 gamePlayer.PlayGames(gameBatchSize);
 
                 Console.WriteLine();
-                stats.Display();
-
+                gamePlayer.GameStats.Display();
                 Console.WriteLine();
             }
         }

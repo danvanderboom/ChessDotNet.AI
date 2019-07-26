@@ -15,6 +15,11 @@ namespace AutoChessPlayer
         public event Action<ChessGame, Move, ChessGame> MoveMade;
         public event Action<ChessGame, GameResult> GameConcluded;
 
+        public AutoChessGamePlayer()
+        {
+            GameStats = new GameStats();
+        }
+
         public GameStats PlayGames(int gameCount)
         {
             if (WhitePlayer == null)
