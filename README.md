@@ -26,7 +26,7 @@ var gamePlayer = new AutoChessGamePlayer
 };
 
 // play a single game
-var gameResult = gamePlayer.PlayGame(new RandomAgent(), new RandomAgent());
+var gameResult = gamePlayer.PlayGame();
 
 // play a batch of 100 games
 var stats = gamePlayer.PlayGames(100);
