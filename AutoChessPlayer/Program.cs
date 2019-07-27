@@ -20,8 +20,8 @@ namespace AutoChessPlayer
 
             var gamePlayer = new AutoChessGamePlayer
             {
-                WhitePlayer = new RandomAgent(),
-                BlackPlayer = new RandomAgent() // BlackPlayer = new SpatialControlMaximizerAgent()
+                WhiteAgent = new RandomAgent(),
+                BlackAgent = new RandomAgent() // BlackPlayer = new SpatialControlMaximizerAgent()
             };
 
             //var stats = gamePlayer.GameStats;

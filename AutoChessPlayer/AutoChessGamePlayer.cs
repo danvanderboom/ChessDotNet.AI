@@ -8,8 +8,9 @@ namespace AutoChessPlayer
 {
     public class AutoChessGamePlayer
     {
-        public IChessAgent WhitePlayer { get; set; }
-        public IChessAgent BlackPlayer { get; set; }
+        public IChessAgent WhiteAgent { get; set; }
+        public IChessAgent BlackAgent { get; set; }
+
         public GameStats GameStats { get; set; }
 
         public event Action<ChessGame, Move, ChessGame> MoveMade;
@@ -22,11 +23,11 @@ namespace AutoChessPlayer
 
         public GameStats PlayGames(int gameCount)
         {
-            if (WhitePlayer == null)
-                throw new ArgumentNullException(nameof(WhitePlayer));
+            if (WhiteAgent == null)
+                throw new ArgumentNullException(nameof(WhiteAgent));
 
-            if (BlackPlayer == null)
-                throw new ArgumentNullException(nameof(BlackPlayer));
+            if (BlackAgent == null)
+                throw new ArgumentNullException(nameof(BlackAgent));
 
             for (int i = 0; i < gameCount; i++)
                 PlayGame();
@@ -34,9 +35,10 @@ namespace AutoChessPlayer
             return GameStats;
         }
 
-        public GameResult PlayGame()
+        public GameResult PlayGame(ChessGame startingPosition = null)
         {
-            var game = new ChessGame();
+            var game = startingPosition ?? new ChessGame();
+
             var gameResult = new GameResult();
 
             GameStats.GameCount += 1;
@@ -53,9 +55,7 @@ namespace AutoChessPlayer
                     break;
                 }
 
-                Move move = game.WhoseTurn == Player.White
-                    ? WhitePlayer.GenerateMove(game)
-                    : BlackPlayer.GenerateMove(game);
+                var move = (game.WhoseTurn == Player.White ? WhiteAgent : BlackAgent).GenerateMove(game);
 
                 GameStats.MoveCount += 1;
                 gameResult.MoveCount += 1;
